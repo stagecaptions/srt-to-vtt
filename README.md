@@ -1,5 +1,9 @@
 # SRT to VTT Converter
 
+[![npm version](https://img.shields.io/npm/v/@stagecaptions/srt-to-vtt)](https://www.npmjs.com/package/@stagecaptions/srt-to-vtt)
+[![CI](https://github.com/stagecaptions/srt-to-vtt/actions/workflows/ci.yml/badge.svg)](https://github.com/stagecaptions/srt-to-vtt/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/github/license/stagecaptions/srt-to-vtt)](https://github.com/stagecaptions/srt-to-vtt/blob/main/LICENSE)
+
 A command line tool and JavaScript library that converts subtitle files from
 SubRip (`.srt`) format to WebVTT (`.vtt`) format.
 
