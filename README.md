@@ -93,49 +93,6 @@ const warnings = validateSrt(srtText);
 ]
 ```
 
-## Why convert SRT to VTT?
-
-WebVTT is the subtitle and caption format supported by the HTML `<track>`
-element. If you have an `.srt` subtitle file and want to use it in a browser
-video player, you usually need to convert it to `.vtt` first.
-
-## Development
-
-Run tests:
-
-```bash
-npm test
-```
-
-Check JavaScript syntax:
-
-```bash
-npm run check
-```
-
-Run the local CLI:
-
-```bash
-node bin/srt-to-vtt.js examples/input.srt /tmp/output.vtt
-```
-
-## Repository Topics
-
-Suggested GitHub topics:
-
-```txt
-srt
-vtt
-webvtt
-subrip
-subtitles
-captions
-subtitle-converter
-srt-to-vtt
-cli
-accessibility
-```
-
 ## License
 
 MIT
