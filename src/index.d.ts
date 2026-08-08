@@ -3,6 +3,7 @@ export interface SrtToVttOptions {
 }
 
 export interface SrtValidationWarning {
+  code: "invalid-timestamp" | "no-cues";
   line: number;
   message: string;
 }

@@ -20,6 +20,15 @@ if (args.includes("--version") || args.includes("-v")) {
 
 const preserveCueIds = consumeFlag(args, "--preserve-cue-ids");
 const validateOnly = consumeFlag(args, "--validate");
+
+const unknownOption = args.find(arg => arg.startsWith("-"));
+
+if (unknownOption) {
+  console.error(`Unknown option: ${unknownOption}`);
+  printHelp();
+  process.exit(1);
+}
+
 const positional = args.filter(arg => !arg.startsWith("-"));
 
 if (positional.length < 1 || positional.length > 2) {
@@ -36,9 +45,7 @@ if (warnings.length > 0) {
     console.error(`${inputPath}:${warning.line} ${warning.message}`);
   }
 
-  if (validateOnly) {
-    process.exit(1);
-  }
+  process.exit(1);
 }
 
 if (validateOnly) {

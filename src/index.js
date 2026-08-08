@@ -13,6 +13,13 @@ export function srtToVtt(input, options = {}) {
     throw new TypeError("srtToVtt expected a string input.");
   }
 
+  const warnings = validateSrt(input);
+  const invalidTimestamp = warnings.find(warning => warning.code === "invalid-timestamp");
+
+  if (invalidTimestamp) {
+    throw new Error(`${invalidTimestamp.message} Line ${invalidTimestamp.line}.`);
+  }
+
   const normalizedInput = normalizeText(input);
   const blocks = normalizedInput.split(/\n{2,}/).map(block => block.trim()).filter(Boolean);
   const cues = [];
@@ -47,6 +54,10 @@ export function srtToVtt(input, options = {}) {
     cues.push("");
   }
 
+  if (cues.length === 0) {
+    return "WEBVTT\n\n";
+  }
+
   return `WEBVTT\n\n${cues.join("\n").trimEnd()}\n`;
 }
 
@@ -54,7 +65,7 @@ export function srtToVtt(input, options = {}) {
  * Return basic validation warnings for SRT input.
  *
  * @param {string} input
- * @returns {{ line: number, message: string }[]}
+ * @returns {{ code: string, line: number, message: string }[]}
  */
 export function validateSrt(input) {
   if (typeof input !== "string") {
@@ -72,6 +83,7 @@ export function validateSrt(input) {
 
       if (!TIMESTAMP_LINE.test(line.trim())) {
         warnings.push({
+          code: "invalid-timestamp",
           line: index + 1,
           message: "Invalid timestamp line. Expected HH:MM:SS,mmm --> HH:MM:SS,mmm.",
         });
@@ -83,6 +95,7 @@ export function validateSrt(input) {
 
   if (timingLines === 0 && timestampAttempts === 0) {
     warnings.push({
+      code: "no-cues",
       line: 1,
       message: "No SRT cues found.",
     });

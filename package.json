@@ -3,6 +3,9 @@
   "version": "0.0.2",
   "description": "A command line tool and JavaScript library that converts subtitle files from SubRip (.srt) format to WebVTT (.vtt) format.",
   "type": "module",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "sideEffects": false,
   "bin": {
     "srt-to-vtt": "bin/srt-to-vtt.js"
   },
@@ -21,7 +24,8 @@
   ],
   "scripts": {
     "test": "node --test",
-    "check": "node --check src/index.js && node --check bin/srt-to-vtt.js"
+    "check": "node --check src/index.js && node --check bin/srt-to-vtt.js",
+    "prepublishOnly": "npm run check && npm test"
   },
   "keywords": [
     "srt",
