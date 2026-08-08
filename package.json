@@ -1,0 +1,51 @@
+{
+  "name": "@stagecaptions/srt-to-vtt",
+  "version": "0.1.0",
+  "description": "A command line tool and JavaScript library that converts subtitle files from SubRip (.srt) format to WebVTT (.vtt) format.",
+  "type": "module",
+  "bin": {
+    "srt-to-vtt": "./bin/srt-to-vtt.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js"
+    }
+  },
+  "files": [
+    "bin",
+    "examples",
+    "src",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check src/index.js && node --check bin/srt-to-vtt.js"
+  },
+  "keywords": [
+    "srt",
+    "vtt",
+    "webvtt",
+    "subrip",
+    "subtitles",
+    "captions",
+    "subtitle-converter",
+    "srt-to-vtt",
+    "cli",
+    "accessibility"
+  ],
+  "author": "StageCaptions",
+  "license": "MIT",
+  "homepage": "https://stagecaptions.io/tools/srt-to-vtt",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stagecaptions/srt-to-vtt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stagecaptions/srt-to-vtt/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
