@@ -1,6 +1,6 @@
 {
   "name": "@stagecaptions/srt-to-vtt",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A command line tool and JavaScript library that converts subtitle files between SubRip (.srt) and WebVTT (.vtt) formats.",
   "type": "module",
   "main": "./src/index.js",
