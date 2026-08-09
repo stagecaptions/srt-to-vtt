@@ -4,51 +4,24 @@
 [![CI](https://github.com/stagecaptions/srt-to-vtt/actions/workflows/ci.yml/badge.svg)](https://github.com/stagecaptions/srt-to-vtt/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/github/license/stagecaptions/srt-to-vtt)](https://github.com/stagecaptions/srt-to-vtt/blob/main/LICENSE)
 
-A command line tool and JavaScript library that converts subtitle files from
-SubRip (`.srt`) format to WebVTT (`.vtt`) format.
+A command line tool and JavaScript library that converts subtitle files between
+SubRip (`.srt`) and WebVTT (`.vtt`) formats.
 
 Built by [StageCaptions](https://stagecaptions.io), browser-based live
 captioning software for live events, conferences, and broadcasts.
 
-## Features
-
-- Converts `.srt` subtitle files to browser-friendly `.vtt` files
-- Works as a CLI, Node.js library, and browser-compatible JavaScript module
-- Runs offline with no external dependencies
-- Normalizes SRT timestamps from `00:00:01,000` to `00:00:01.000`
-- Handles UTF-8 BOM files, CRLF line endings, and multiline subtitle cues
-- Includes a small validator for malformed timestamp lines
-
 ## Usage
 
-Run it directly with `npx`:
+Convert SRT to VTT:
 
 ```bash
 npx @stagecaptions/srt-to-vtt input.srt output.vtt
 ```
 
-If you omit the output file, the converter writes next to the input file:
+Convert WebVTT back to SRT:
 
 ```bash
-npx @stagecaptions/srt-to-vtt captions.srt
-```
-
-This creates:
-
-```txt
-captions.vtt
-```
-
-Validate an SRT file without writing output:
-
-```bash
-npx @stagecaptions/srt-to-vtt captions.srt --validate
-```
-
-Preserve SRT cue numbers as WebVTT cue identifiers:
-
-```bash
-npx @stagecaptions/srt-to-vtt captions.srt captions.vtt --preserve-cue-ids
+npx @stagecaptions/srt-to-vtt input.vtt output.srt
 ```
 
 ## Install
@@ -60,41 +33,25 @@ npm install @stagecaptions/srt-to-vtt
 ## JavaScript API
 
 ```js
-import { srtToVtt } from "@stagecaptions/srt-to-vtt";
+import { srtToVtt, vttToSrt } from "@stagecaptions/srt-to-vtt";
 
 const vtt = srtToVtt(`1
 00:00:01,000 --> 00:00:03,500
 Hello world.`);
 
-console.log(vtt);
-```
-
-Output:
-
-```vtt
-WEBVTT
+const srt = vttToSrt(`WEBVTT
 
 00:00:01.000 --> 00:00:03.500
-Hello world.
+Hello world.`);
 ```
 
 ## Validation
 
 ```js
-import { validateSrt } from "@stagecaptions/srt-to-vtt";
+import { validateSrt, validateVtt } from "@stagecaptions/srt-to-vtt";
 
-const warnings = validateSrt(srtText);
-```
-
-`validateSrt` returns an array of warnings:
-
-```js
-[
-  {
-    line: 2,
-    message: "Invalid timestamp line. Expected HH:MM:SS,mmm --> HH:MM:SS,mmm."
-  }
-]
+const srtWarnings = validateSrt(srtText);
+const vttWarnings = validateVtt(vttText);
 ```
 
 ## License
